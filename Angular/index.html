@@ -1,16 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="stockTable">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="main.css">
     <title>Angular 1.7.9</title>
 </head>
-<body ng-init>
+<body>
     <div>
-        <label>Skriv ditt namn:</label>
-        <input type="text" ng-model="namn">
-        <h1>Hejsan {{namn}}</h1>
-      </div>
+        <h1>AngularJS version 1.7.9</h1>
+        <table ng-controller="tableController as table">
+            <thead>
+                <tr>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Value
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="content in table.content">
+                    <td>
+                        {{content.date}}
+                    </td>
+                    <td>
+                        {{content.name}}
+                    </td>
+                    <td>
+                        {{content.value}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
