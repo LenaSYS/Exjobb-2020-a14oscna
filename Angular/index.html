@@ -10,22 +10,22 @@
     <link rel="stylesheet" href="main.css">
     <title>Angular 1.7.9</title>
 </head>
-<body>
+<body ng-init>
     <div>
         <h1>{{frameworkName}} version 1.7.9</h1>
         <div ng-controller="fileController">
             <input type="file" name="Upload" id="csvUpload" onchange="angular.element(this).scope().upload(this)" accept=".csv" />
         </div>       
-        <table ng-controller="tableController as table">
+        <table ng-controller="tableController">
             <thead>
                 <tr>
-                    <th ng-repeat="head in rootScope.datasetHead">
-                        {{head}}
+                    <th ng-repeat="head in thead">
+                        {{head.name}}
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="content in data">
+                <tr ng-repeat="content in tbody">
                     <td>
                         {{content.data}}
                     </td>
