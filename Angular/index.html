@@ -4,37 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="papaparse.min.js"></script>
     <script src="main.js"></script>
+<!--     <script defer src="csvParser.js"></script> -->
     <link rel="stylesheet" href="main.css">
     <title>Angular 1.7.9</title>
 </head>
 <body>
     <div>
-        <h1>AngularJS version 1.7.9</h1>
+        <h1>{{frameworkName}} version 1.7.9</h1>
+        <div ng-controller="fileController">
+            <input type="file" name="Upload" id="csvUpload" onchange="angular.element(this).scope().upload(this)" accept=".csv" />
+        </div>       
         <table ng-controller="tableController as table">
             <thead>
                 <tr>
-                    <th>
-                        Date
-                    </th>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Value
+                    <th ng-repeat="head in rootScope.datasetHead">
+                        {{head}}
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="content in table.content">
+                <tr ng-repeat="content in data">
                     <td>
-                        {{content.date}}
+                        {{content.data}}
                     </td>
                     <td>
-                        {{content.name}}
+
                     </td>
                     <td>
-                        {{content.value}}
+
                     </td>
                 </tr>
             </tbody>
