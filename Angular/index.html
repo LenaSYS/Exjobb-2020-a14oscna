@@ -11,29 +11,60 @@
     <title>Angular 1.7.9</title>
 </head>
 <body ng-init>
-    <div>
+    <div ng-controller="tableController">
         <h1>{{frameworkName}} version 1.7.9</h1>
-        <div ng-controller="fileController">
+        <div>
             <input type="file" name="Upload" id="csvUpload" onchange="angular.element(this).scope().upload(this)" accept=".csv" />
+            <button ng-click="updateTable()">Update</button>
         </div>       
-        <table ng-controller="tableController">
+        <table>
             <thead>
                 <tr>
-                    <th ng-repeat="head in thead">
-                        {{head.name}}
+                    <th ng-repeat="head in thead track by $index"> <!-- track by $index is used because ng-repeat does not allow duplicate keys -->
+                        {{head}}
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="content in tbody">
+                <tr ng-repeat="body in tbody">
                     <td>
-                        {{content.data}}
+                        {{body.Bolagsnamn}}
                     </td>
                     <td>
-
+                        {{body.Land}}
                     </td>
                     <td>
-
+                        {{body.Lista}}
+                    </td>
+                    <td>
+                        {{body.Sektor}}
+                    </td>
+                    <td>
+                        {{body.Bransch}}
+                    </td>
+                    <td>
+                        {{body.Ticker}}
+                    </td>
+                    <td>
+                        {{body.Instrument}}
+                    </td>
+                    <td>
+                        {{body.Rapport}}
+                    </td>
+                    <td>
+                        {{body.Kursutveckling}}
+                    </td>
+                    <td>
+                        {{body.Direktavkastning}}
+                    </td>
+                    <td>
+                        {{body.P/E}}
+                    </td>
+                    <td>
+                        {{body.P/S}}
+                    </td>
+                    <td>
+                        {{body.P/B}}
                     </td>
                 </tr>
             </tbody>
