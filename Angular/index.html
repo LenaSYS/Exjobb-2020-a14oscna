@@ -1,11 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="stockTable">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="papaparse.min.js"></script>
+    <script src="main.js"></script>
+<!--     <script defer src="csvParser.js"></script> -->
+    <link rel="stylesheet" href="main.css">
+    <title>Angular 1.7.9</title>
 </head>
-<body>
-    
+<body ng-init>
+    <div>
+        <h1>{{frameworkName}} version 1.7.9</h1>
+        <div ng-controller="fileController">
+            <input type="file" name="Upload" id="csvUpload" onchange="angular.element(this).scope().upload(this)" accept=".csv" />
+        </div>       
+        <table ng-controller="tableController">
+            <thead>
+                <tr>
+                    <th ng-repeat="head in thead">
+                        {{head.name}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="content in tbody">
+                    <td>
+                        {{content.data}}
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
