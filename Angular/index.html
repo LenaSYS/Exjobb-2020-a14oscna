@@ -12,21 +12,21 @@
 </head>
 <body ng-init>
     <div ng-controller="tableController">
-        <h1>{{frameworkName}} version 1.7.9</h1>
+        <h1>Angular version 1.7.9</h1>
         <div>
-            <input type="file" name="Upload" id="csvUpload" onchange="angular.element(this).scope().upload(this)" accept=".csv" />
-            <button ng-click="updateTable()">Update</button>
+            <input type="file" select-ng-file ng-model="stockData" accept=".csv" />
         </div>       
         <table>
             <thead>
                 <tr>
-                    <th ng-repeat="head in thead track by $index"> <!-- track by $index is used because ng-repeat does not allow duplicate keys -->
+            <!-- track by $index is used because ng-repeat does not allow duplicate keys -->
+                    <th ng-repeat="head in stockHead track by $index"> 
                         {{head}}
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="body in tbody">
+                <tr ng-repeat="body in stockData">
                     <td>
                         {{body.Bolagsnamn}}
                     </td>
@@ -55,16 +55,16 @@
                         {{body.Kursutveckling}}
                     </td>
                     <td>
-                        {{body.Direktavkastning}}
+                        {{body.Direktavkastning || "Saknar Data"}}
                     </td>
                     <td>
-                        {{body.P/E}}
+                        {{body['P/E']}}
                     </td>
                     <td>
-                        {{body.P/S}}
+                        {{body['P/S'] || "Saknar Data"}}
                     </td>
                     <td>
-                        {{body.P/B}}
+                        {{body['P/B']}}
                     </td>
                 </tr>
             </tbody>

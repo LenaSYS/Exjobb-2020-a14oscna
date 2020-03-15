@@ -1,8 +1,13 @@
+body {
+    color: aliceblue;
+    background-color: rgb(34, 10, 10);
+}
+
 table {
     border-collapse: collapse;
 }
 
 td, th {
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid wheat;
 }
