@@ -15,6 +15,8 @@
         <h1>Angular version 1.7.9</h1>
         <div>
             <input type="file" select-ng-file ng-model="stockData" accept=".csv" />
+            <!-- select-ng-file is custom directive, links data back via ng-model="stockData"
+                 which is further used in the table below -->
         </div>       
         <table>
             <thead>
@@ -27,6 +29,9 @@
             </thead>
             <tbody>
                 <tr ng-repeat="body in stockData">
+                    <td>
+                        {{$index + 1}}
+                    </td>
                     <td>
                         {{body.Bolagsnamn}}
                     </td>

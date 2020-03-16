@@ -13,7 +13,8 @@ angular.module('stockTable', [])
           reader.onload = function(e) {
             var csv = e.target.result;
             var data = Papa.parse(csv, {header : true, preview: rowSize});
-            scope.stockHead = data.meta.fields
+            data.meta.fields.unshift("Index");
+            scope.stockHead = data.meta.fields;
             ngModel.$setViewValue(data.data);
           };
         }
