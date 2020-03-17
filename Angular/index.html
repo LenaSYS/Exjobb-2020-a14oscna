@@ -17,18 +17,19 @@
             <input type="file" select-ng-file ng-model="stockData" accept=".csv" />
             <!-- select-ng-file is custom directive, links data back via ng-model="stockData"
                  which is further used in the table below -->
-        </div>       
+        </div> 
+        <label for="searchBox">Sök: <input type="text" name="searchBox1" id="searchBox" ng-model="filterText" ></label>      
         <table>
             <thead>
                 <tr>
             <!-- track by $index is used because ng-repeat does not allow duplicate keys -->
-                    <th ng-repeat="head in stockHead track by $index"> 
+                    <th ng-repeat="head in stockHead track by $index" ng-click="sortData(head)"> 
                         {{head}}
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="body in stockData">
+                <tr ng-repeat="body in stockData | filter:filterText | orderBy: sortedColumn: reverseOrder">
                     <td>
                         {{$index + 1}}
                     </td>
@@ -60,16 +61,16 @@
                         {{body.Kursutveckling}}
                     </td>
                     <td>
-                        {{body.Direktavkastning || "Saknar Data"}}
+                        {{body.Direktavkastning}}
                     </td>
                     <td>
-                        {{body['P/E']}}
+                        {{body.PE}} <!-- column renamed because of conflict with the orderBy logic -->
                     </td>
                     <td>
-                        {{body['P/S'] || "Saknar Data"}}
+                        {{body.PS}}
                     </td>
                     <td>
-                        {{body['P/B']}}
+                        {{body.PB}}
                     </td>
                 </tr>
             </tbody>
