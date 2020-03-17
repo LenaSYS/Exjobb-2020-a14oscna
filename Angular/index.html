@@ -31,9 +31,6 @@
             <tbody>
                 <tr ng-repeat="body in stockData | filter:filterText | orderBy: sortedColumn: reverseOrder">
                     <td>
-                        {{$index + 1}}
-                    </td>
-                    <td>
                         {{body.Bolagsnamn}}
                     </td>
                     <td>

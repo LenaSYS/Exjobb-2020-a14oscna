@@ -12,3 +12,11 @@ td, th {
     padding: 5px;
     border: 1px solid wheat;
 }
+
+th {
+    cursor: pointer;
+}
+
+#searchBox {
+    margin: 15px 0;
+}

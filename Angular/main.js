@@ -5,15 +5,16 @@ angular.module('stockTable', [])
     require: "ngModel",
     link: function(scope,elem,attrs,ngModel) {
       elem.on("change", function(e) {
-        var rowSize = 10;
+        var rowSize = 100; //set number of rows to parse;
         var file = elem[0].files[0];
         var reader = new FileReader();
+        
         if (file) {
           reader.readAsText(file);
+          
           reader.onload = function(e) {
             var csv = e.target.result;
             var data = Papa.parse(csv, {header : true, preview: rowSize});
-            data.meta.fields.unshift("Index"); //will be removed later
 
             data.data.forEach(x => {
               x.Kursutveckling = scope.parseNumbers(x.Kursutveckling);
@@ -25,8 +26,6 @@ angular.module('stockTable', [])
 
             scope.stockHead = data.meta.fields;
             ngModel.$setViewValue(data.data);
-            console.log(scope);
-            console.log(data.data);
           };
         }
       })
@@ -45,6 +44,5 @@ angular.module('stockTable', [])
   $scope.sortData = function (column) {
     $scope.reverseOrder = ($scope.sortedColumn == column) ? !$scope.reverseOrder : false;
     $scope.sortedColumn = column;
-    console.log(column);
   };
 });
