@@ -3,7 +3,7 @@ angular.module('stockTable', [])
 .directive("selectNgFile", function() {
   return {
     require: "ngModel",
-    link: function(scope,elem,attrs,ngModel) {
+    link: function(scope,elem,attr,ctrlr) {
       elem.on("change", function(e) {
         var rowSize = 100; //set number of rows to parse;
         var file = elem[0].files[0];
@@ -25,7 +25,7 @@ angular.module('stockTable', [])
             });
 
             scope.stockHead = data.meta.fields;
-            ngModel.$setViewValue(data.data);
+            ctrlr.$setViewValue(data.data);
           };
         }
       })
