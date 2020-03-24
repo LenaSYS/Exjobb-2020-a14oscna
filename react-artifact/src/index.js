@@ -1,32 +1,45 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function CreateTable() {
-    return (
+function CreateTable(props) {
+    const thead = props.head;
+    const hRow = thead.map((item, index) =>
+        <th key={index}>{item}</th>
+    );
+
+    const tbody = props.body;
+    console.log(tbody[0]);
+    const bRow = tbody.map((item, index) =>
+        <tr> {/* need to fix key */}
+            <td key={item+index}>{item.Bolagsnamn}</td>
+            <td key={item+index}>{item.Land}</td>
+            <td key={item+index}>{item.Lista}</td>
+            <td key={item+index}>{item.Sektor}</td>
+            <td key={item+index}>{item.Bransch}</td>
+            <td key={item+index}>{item.Ticker}</td>
+            <td key={item+index}>{item.Instrument}</td>
+            <td key={item+index}>{item.Rapport}</td>
+            <td key={item+index}>{item.Kursutveckling}</td>
+            <td key={item+index}>{item.Direktavkastning}</td>
+            <td key={item+index}>{item.PE}</td>
+            <td key={item+index}>{item.PS}</td>
+            <td key={item+index}>{item.PB}</td>
+        </tr>
+    ); 
+    return (       
         <table>
+            
             <thead>
                 <tr>
-                    <th> 
-                        head 1
-                    </th>
-                    <th> 
-                        head 2
-                    </th>
+                    {hRow}
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        cell 1
-                    </td>
-                    <td>
-                        cell 2
-                    </td>
-                </tr>
+                    {bRow}
             </tbody>
         </table>
     );
-  }
+}
 
   class Artifact extends React.Component {
     constructor(props) {
@@ -42,14 +55,15 @@ function CreateTable() {
         var rowSize = 100; //set number of rows to parse;
         var file = e.target.files[0];
         var reader = new FileReader();
+        function parseNumbers (s) {
+            if (s === "") return s;
+            return parseFloat(s);
+        };
         
         if (file) {
             reader.readAsText(file);         
             reader.onload = (e) => {
-                function parseNumbers (s) {
-                    if (s === "") return s;
-                    return parseFloat(s);
-                };
+                
                 var csv = e.target.result;
                 var data = window.Papa.parse(csv, {
                     header : true, 
@@ -68,22 +82,25 @@ function CreateTable() {
                     dataHead: data.meta.fields,
                     dataBody: data.data
                 });                     
-                console.log(this.state.dataHead)
+/*                 console.log(this.state.dataHead)
                 console.log(this.state.dataBody)
-                console.log(this);
+                console.log(this); */
           };
         }
     }
 
     render() {
-      return (
-        <div>
-          <h1>React version 16.13.1</h1>
-          <div><input type="file" onChange={this.getFile} accept=".csv" /></div>          
-          <label htmlFor="searchBox">Sök: <input type="text" id="searchBox"/></label>
-          <CreateTable/>
-        </div>
-      );
+        return (
+            <div>
+            <h1>React version 16.13.1</h1>
+            <div><input type="file" onChange={this.getFile} accept=".csv" /></div>          
+            <label htmlFor="searchBox">Sök: <input type="text" id="searchBox"/></label>
+            <CreateTable 
+                head={this.state.dataHead}
+                body={this.state.dataBody}
+            />
+            </div>
+        );
     }
   }
 
