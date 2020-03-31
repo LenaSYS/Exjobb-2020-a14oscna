@@ -1,6 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+
+function TableRow(props) {
+   return <tr>
+            <td>{props.value.Bolagsnamn}</td>
+            <td>{props.value.Land}</td>
+            <td>{props.value.Lista}</td>
+            <td>{props.value.Sektor}</td>
+            <td>{props.value.Bransch}</td>
+            <td>{props.value.Ticker}</td>
+            <td>{props.value.Instrument}</td>
+            <td>{props.value.Rapport}</td>
+            <td>{props.value.Kursutveckling}</td>
+            <td>{props.value.Direktavkastning}</td>
+            <td>{props.value.PE}</td>
+            <td>{props.value.PS}</td>
+            <td>{props.value.PB}</td>
+        </tr>
+}
+
 function CreateTable(props) {
     const thead = props.head;
     const hRow = thead.map((item, index) =>
@@ -8,27 +27,12 @@ function CreateTable(props) {
     );
 
     const tbody = props.body;
-    console.log(tbody[0]);
     const bRow = tbody.map((item, index) =>
-        <tr> {/* need to fix key */}
-            <td key={item+index}>{item.Bolagsnamn}</td>
-            <td key={item+index}>{item.Land}</td>
-            <td key={item+index}>{item.Lista}</td>
-            <td key={item+index}>{item.Sektor}</td>
-            <td key={item+index}>{item.Bransch}</td>
-            <td key={item+index}>{item.Ticker}</td>
-            <td key={item+index}>{item.Instrument}</td>
-            <td key={item+index}>{item.Rapport}</td>
-            <td key={item+index}>{item.Kursutveckling}</td>
-            <td key={item+index}>{item.Direktavkastning}</td>
-            <td key={item+index}>{item.PE}</td>
-            <td key={item+index}>{item.PS}</td>
-            <td key={item+index}>{item.PB}</td>
-        </tr>
+        <TableRow key={index} value={item} />
     ); 
+    
     return (       
-        <table>
-            
+        <table>            
             <thead>
                 <tr>
                     {hRow}
@@ -41,7 +45,7 @@ function CreateTable(props) {
     );
 }
 
-  class Artifact extends React.Component {
+class Artifact extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -52,7 +56,7 @@ function CreateTable(props) {
     }
 
     getFile (e) {
-        var rowSize = 100; //set number of rows to parse;
+        var rowSize = 10; //set number of rows to parse;
         var file = e.target.files[0];
         var reader = new FileReader();
         function parseNumbers (s) {
@@ -102,7 +106,7 @@ function CreateTable(props) {
             </div>
         );
     }
-  }
+}
 
 ReactDOM.render(<Artifact />, document.getElementById('root'));
 
