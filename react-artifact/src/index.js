@@ -26,7 +26,8 @@ function CreateTable(props) {
         <th onClick={() => props.sortData(item)} key={index}>{item}</th>
     );
 
-    const tbody = props.body;
+    console.log("ran") //check for fix on double inital render
+    const tbody = props.body.filter(x => x.Bolagsnamn.toUpperCase().indexOf(props.filter.toUpperCase()) !== -1);
     const bRow = tbody.map((item, index) =>
         <TableRow key={index} value={item} />
     ); 
@@ -50,12 +51,17 @@ class Artifact extends React.Component {
         super(props);
         this.state = {
             dataHead: [],
-            dataBody: []
+            dataBody: [],
+            filterString: ''
         };
         this.getFile = this.getFile.bind(this);
         this.sortData = this.sortData.bind(this);
         this.sortedColumn = "Bolagsnamn";
         this.reverseOrder = true;
+    }
+
+    updateSearch(event) {
+        this.setState({filterString: event.target.value.substr(0,20)});
     }
 
     sortData(column) {
@@ -126,11 +132,20 @@ class Artifact extends React.Component {
             <div>
             <h1>React version 16.13.1</h1>
             <div><input type="file" onChange={this.getFile} accept=".csv" /></div>          
-            <label htmlFor="searchBox">Sök: <input type="text" id="searchBox"/></label>
+            <label htmlFor="searchBox">
+                Sök: 
+                <input 
+                    type="text" 
+                    id="searchBox" 
+                    value={this.state.filterString} 
+                    onChange={this.updateSearch.bind(this)} 
+                />
+            </label>
             <CreateTable 
                 head={this.state.dataHead}
                 body={this.state.dataBody}
                 sortData={this.sortData}
+                filter={this.state.filterString}
             />
             </div>
         );
