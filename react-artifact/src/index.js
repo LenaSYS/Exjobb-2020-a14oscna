@@ -23,7 +23,7 @@ function TableRow(props) {
 function CreateTable(props) {
     const thead = props.head;
     const hRow = thead.map((item, index) =>
-        <th key={index}>{item}</th>
+        <th onClick={() => props.sortData(item)} key={index}>{item}</th>
     );
 
     const tbody = props.body;
@@ -53,12 +53,43 @@ class Artifact extends React.Component {
             dataBody: []
         };
         this.getFile = this.getFile.bind(this);
+        this.sortData = this.sortData.bind(this);
+        this.sortedColumn = "Bolagsnamn";
+        this.reverseOrder = true;
+    }
+
+    sortData(column) {
+        this.reverseOrder = (this.sortedColumn === column) ? !this.reverseOrder : false;
+        this.sortedColumn = column;
+
+        this.setState({
+            dataBody: this.state.dataBody.sort((a,b) => {
+                let x, y;
+
+                if(typeof(a[column]) === "string" && typeof(b[column]) === "string") {
+                    x = a[column].toUpperCase();
+                    y = b[column].toUpperCase();
+                }
+                else{
+                    x = a[column];
+                    y = b[column];
+                }
+
+                if(this.reverseOrder) {
+                    return (x < y) ? 1 : -1;  
+                }
+                else {
+                    return (x > y) ? 1 : -1;   
+                }            
+            })
+        })      
     }
 
     getFile (e) {
         var rowSize = 10; //set number of rows to parse;
         var file = e.target.files[0];
         var reader = new FileReader();
+        
         function parseNumbers (s) {
             if (s === "") return s;
             return parseFloat(s);
@@ -66,8 +97,7 @@ class Artifact extends React.Component {
         
         if (file) {
             reader.readAsText(file);         
-            reader.onload = (e) => {
-                
+            reader.onload = (e) => {               
                 var csv = e.target.result;
                 var data = window.Papa.parse(csv, {
                     header : true, 
@@ -85,11 +115,9 @@ class Artifact extends React.Component {
                 this.setState({
                     dataHead: data.meta.fields,
                     dataBody: data.data
-                });                     
-/*                 console.log(this.state.dataHead)
-                console.log(this.state.dataBody)
-                console.log(this); */
-          };
+                }); 
+                this.sortData(this.sortedColumn);                    
+            };
         }
     }
 
@@ -102,6 +130,7 @@ class Artifact extends React.Component {
             <CreateTable 
                 head={this.state.dataHead}
                 body={this.state.dataBody}
+                sortData={this.sortData}
             />
             </div>
         );

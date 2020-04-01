@@ -1,0 +1,22 @@
+body {
+    color: aliceblue;
+    background-color: rgb(34, 10, 10);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    padding: 5px;
+    border: 1px solid wheat;
+}
+
+th {
+    cursor: pointer;
+}
+
+#searchBox {
+    margin: 15px 0;
+}
