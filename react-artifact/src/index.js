@@ -1,26 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function TableRow(props) {
-   return <tr>
-            <td>{props.value.Bolagsnamn}</td>
-            <td>{props.value.Land}</td>
-            <td>{props.value.Lista}</td>
-            <td>{props.value.Sektor}</td>
-            <td>{props.value.Bransch}</td>
-            <td>{props.value.Ticker}</td>
-            <td>{props.value.Instrument}</td>
-            <td>{props.value.Rapport}</td>
-            <td>{props.value.Kursutveckling}</td>
-            <td>{props.value.Direktavkastning}</td>
-            <td>{props.value.PE}</td>
-            <td>{props.value.PS}</td>
-            <td>{props.value.PB}</td>
-        </tr>
-};
-
 function CreateTableHead(props) {
-    console.log("head")
     const thead = props.head;
     const hRow = thead.map((item, index) =>
         <th onClick={() => props.sortData(item)} key={index}>{item}</th>
@@ -38,31 +19,33 @@ function CreateTableHead(props) {
 function CreateTableBody(props) {
     const tbody = props.body.filter(x => { 
         for (let val in x) {
-            if (typeof(x[val]) === "string") {
-                if (x[val].toUpperCase().indexOf(props.filter.toUpperCase()) !== -1) {
-                    return true
-                }
+            if (typeof(x[val]) === "string") 
+            {
+                if (x[val].toUpperCase().indexOf(props.filter.toUpperCase()) !== -1) return true;
             } 
-            else {
-                if (x[val].toString().indexOf(props.filter) !== -1) {
-                    return true
-                } 
+            else 
+            {
+                if (x[val].toString().indexOf(props.filter) !== -1) return true;
             }          
         } 
         return false;      
     });
-    let bRow;
+
     if (tbody.length > 0) {
-        bRow = tbody.map((item, index) =>
-            <TableRow key={index} value={item} />
-        );    
-    };
-         
-    return (       
-        <tbody>
-                {bRow}
-        </tbody>
-    );
+        const bRow = tbody.map((item, index) => {
+            return <tr key={index}>
+                {Object.keys(item).map(function(key) { //puts all object keys into array to allow .map
+                    return <td key={key+index} >{item[key]}</td>;
+                })}
+            </tr>
+        });
+        return (    
+            <tbody>
+                    {bRow}
+            </tbody>
+        );   
+    };        
+    return null; //returns no content if hidden
 };
 
 class Artifact extends React.Component {
@@ -111,7 +94,7 @@ class Artifact extends React.Component {
     }
 
     getFile (e) {
-        var rowSize = 10000; //set number of rows to parse;
+        var rowSize = 10; //set number of rows to parse;
         var file = e.target.files[0];
         var reader = new FileReader();
         
