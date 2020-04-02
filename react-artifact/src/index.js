@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
 function TableRow(props) {
    return <tr>
             <td>{props.value.Bolagsnamn}</td>
@@ -18,33 +17,53 @@ function TableRow(props) {
             <td>{props.value.PS}</td>
             <td>{props.value.PB}</td>
         </tr>
-}
+};
 
-function CreateTable(props) {
+function CreateTableHead(props) {
+    console.log("head")
     const thead = props.head;
     const hRow = thead.map((item, index) =>
         <th onClick={() => props.sortData(item)} key={index}>{item}</th>
     );
-
-    console.log("ran") //check for fix on double inital render
-    const tbody = props.body.filter(x => x.Bolagsnamn.toUpperCase().indexOf(props.filter.toUpperCase()) !== -1);
-    const bRow = tbody.map((item, index) =>
-        <TableRow key={index} value={item} />
-    ); 
     
-    return (       
-        <table>            
-            <thead>
-                <tr>
-                    {hRow}
-                </tr>
-            </thead>
-            <tbody>
-                    {bRow}
-            </tbody>
-        </table>
+    return (                  
+        <thead>
+            <tr>
+                {hRow}
+            </tr>
+        </thead>
     );
-}
+};
+
+function CreateTableBody(props) {
+    const tbody = props.body.filter(x => { 
+        for (let val in x) {
+            if (typeof(x[val]) === "string") {
+                if (x[val].toUpperCase().indexOf(props.filter.toUpperCase()) !== -1) {
+                    return true
+                }
+            } 
+            else {
+                if (x[val].toString().indexOf(props.filter) !== -1) {
+                    return true
+                } 
+            }          
+        } 
+        return false;      
+    });
+    let bRow;
+    if (tbody.length > 0) {
+        bRow = tbody.map((item, index) =>
+            <TableRow key={index} value={item} />
+        );    
+    };
+         
+    return (       
+        <tbody>
+                {bRow}
+        </tbody>
+    );
+};
 
 class Artifact extends React.Component {
     constructor(props) {
@@ -61,7 +80,7 @@ class Artifact extends React.Component {
     }
 
     updateSearch(event) {
-        this.setState({filterString: event.target.value.substr(0,20)});
+        this.setState({filterString: event.target.value});
     }
 
     sortData(column) {
@@ -92,7 +111,7 @@ class Artifact extends React.Component {
     }
 
     getFile (e) {
-        var rowSize = 10; //set number of rows to parse;
+        var rowSize = 10000; //set number of rows to parse;
         var file = e.target.files[0];
         var reader = new FileReader();
         
@@ -130,23 +149,26 @@ class Artifact extends React.Component {
     render() {
         return (
             <div>
-            <h1>React version 16.13.1</h1>
-            <div><input type="file" onChange={this.getFile} accept=".csv" /></div>          
-            <label htmlFor="searchBox">
-                Sök: 
-                <input 
-                    type="text" 
-                    id="searchBox" 
-                    value={this.state.filterString} 
-                    onChange={this.updateSearch.bind(this)} 
-                />
-            </label>
-            <CreateTable 
-                head={this.state.dataHead}
-                body={this.state.dataBody}
-                sortData={this.sortData}
-                filter={this.state.filterString}
-            />
+                <h1>React version 16.13.1</h1>
+                <div><input type="file" onChange={this.getFile} accept=".csv" /></div>          
+                <label htmlFor="searchBox">
+                    Sök: <input 
+                        type="text" 
+                        id="searchBox" 
+                        value={this.state.filterString} 
+                        onChange={this.updateSearch.bind(this)} 
+                    />
+                </label>
+                <table>
+                    <CreateTableHead 
+                        head={this.state.dataHead}
+                        sortData={this.sortData}
+                    />
+                    <CreateTableBody 
+                        body={this.state.dataBody}
+                        filter={this.state.filterString}
+                    />
+                </table>
             </div>
         );
     }

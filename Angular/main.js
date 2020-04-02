@@ -5,7 +5,7 @@ angular.module('stockTable', [])
     require: "ngModel",
     link: function(scope,elem,attr,ctrlr) {
       elem.on("change", function(e) {
-        var rowSize = 100; //set number of rows to parse;
+        var rowSize = 10000; //set number of rows to parse;
         var file = elem[0].files[0];
         var reader = new FileReader();
         
