@@ -45,7 +45,7 @@ function CreateTableBody(props) {
             </tbody>
         );   
     };        
-    return null; //returns no content if hidden
+    return null; //returns no content if bRow is empty
 };
 
 class Artifact extends React.Component {
@@ -132,7 +132,7 @@ class Artifact extends React.Component {
     render() {
         return (
             <div>
-                <h1>React version 16.13.1</h1>
+                <h1 id="start">React version 16.13.1</h1>
                 <div><input type="file" onChange={this.getFile} accept=".csv" /></div>          
                 <label htmlFor="searchBox">
                     Sök: <input 

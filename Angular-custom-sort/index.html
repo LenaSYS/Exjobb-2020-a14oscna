@@ -12,7 +12,7 @@
 </head>
 <body ng-init>
     <div ng-controller="tableController">
-        <h1 id="start">Angular version 1.7.9</h1>
+        <h1 id="start">Angular version 1.7.9 custom sort</h1>
         <div>
             <input type="file" select-ng-file ng-model="stockData" accept=".csv" />
             <!-- select-ng-file is custom directive, links data back via 
@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="body in stockData | filter:filterText | orderBy: sortedColumn: reverseOrder">
+                <tr ng-repeat="body in stockData | filter:filterText">
                     <td ng-repeat="(key, val) in body">
                         {{body[key]}}
                     </td>
