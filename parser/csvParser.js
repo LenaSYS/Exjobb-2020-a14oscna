@@ -1,6 +1,6 @@
 document.getElementById('csvUpload').addEventListener('change', upload);
  
-/* This file is saved as back-up in case my full angular solution does not work */
+/* This file is saved as back-up in case the full angular solution does not work */
 
  function upload(e) {
  var file = e.target.files[0];

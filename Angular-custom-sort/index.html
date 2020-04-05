@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
-    <script src="papaparse.min.js"></script>
+    <script src="../angular-source/angular.min.js"></script>
+    <script src="../parser/papaparse.min.js"></script>
+    <script defer src="sort.js"></script>
+    <script defer src="filter.js"></script>
     <script src="main.js"></script>
-<!--     <script defer src="csvParser.js"></script> -->
     <link rel="stylesheet" href="main.css">
     <title>Angular 1.7.9</title>
 </head>
 <body ng-init>
     <div ng-controller="tableController">
-        <h1 id="start">Angular version 1.7.9 custom sort</h1>
+        <h1>Angular version 1.7.9 custom sort</h1>
+        <span id="sortRandom">sort randomly</span><!-- <span id="setFilter" onclick="setFilter()">set filter</span> --><span id="filterRandom">filter randomly</span>
         <div>
             <input type="file" select-ng-file ng-model="stockData" accept=".csv" />
             <!-- select-ng-file is custom directive, links data back via 
