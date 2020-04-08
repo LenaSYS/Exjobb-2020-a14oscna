@@ -137,7 +137,7 @@ class Artifact extends React.Component {
         requestAnimationFrame(()=> {
             let t = performance.now();
             console.log(t, this.time, t - this.time);
-          });
+        });
     }
 
     render() {
