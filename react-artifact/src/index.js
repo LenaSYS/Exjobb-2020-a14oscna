@@ -45,7 +45,7 @@ function CreateTableBody(props) {
             </tbody>
         );   
     };        
-    return null; //returns no content if bRow is empty
+    return null;
 };
 
 class Artifact extends React.Component {
@@ -63,7 +63,6 @@ class Artifact extends React.Component {
     }
 
     updateSearch(event) {
-        this.time = performance.now();
         this.setState({filterString: event.target.value});
     }
 
