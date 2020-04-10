@@ -13,18 +13,15 @@
 </head>
 <body>
     <div ng-controller="tableController">
-        <h1>Angular version 1.7.9 custom sort</h1>
-        <span id="sortRandom">sort randomly</span><!-- <span id="setFilter" onclick="setFilter()">set filter</span> --><span id="filterRandom">filter randomly</span>
+        <h1>Angular version 1.7.9</h1>
+        <span id="sortRandom">sort</span><span id="filterRandom">filter</span>
         <div>
             <input type="file" select-ng-file ng-model="stockData" accept=".csv" />
-            <!-- select-ng-file is custom directive, links data back via 
-            ng-model="stockData" which is further used in the table below -->
         </div> 
         <label for="searchBox">Sök: <input type="text" name="searchBox1" id="searchBox" ng-model="filterText" ></label>      
         <table>
             <thead>
                 <tr>
-            <!-- track by $index is used because ng-repeat does not allow duplicate keys -->
                     <th ng-repeat="head in stockHead track by $index" ng-click="sortData(head)"> 
                         {{head}}
                     </th>

@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
-    <script src="papaparse.min.js"></script>
+    <script src="../angular-source/angular.min.js"></script>
+    <script src="../parser/papaparse.min.js"></script>
+    <script defer src="sort.js"></script>
+    <script defer src="filter.js"></script>
     <script src="main.js"></script>
     <link rel="stylesheet" href="main.css">
     <title>Angular 1.7.9</title>
@@ -12,16 +14,14 @@
 <body>
     <div ng-controller="tableController">
         <h1>Angular version 1.7.9</h1>
+        <span id="sortRandom">sort</span><span id="filterRandom">filter</span>
         <div>
             <input type="file" select-ng-file ng-model="stockData" accept=".csv" />
-            <!-- select-ng-file is custom directive, links data back via 
-            ng-model="stockData" which is further used in the table below -->
         </div> 
         <label for="searchBox">Sök: <input type="text" name="searchBox1" id="searchBox" ng-model="filterText" ></label>      
         <table>
             <thead>
                 <tr>
-            <!-- track by $index is used because ng-repeat does not allow duplicate keys -->
                     <th ng-repeat="head in stockHead track by $index" ng-click="sortData(head)"> 
                         {{head}}
                     </th>

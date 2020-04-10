@@ -1,11 +1,11 @@
 document.getElementById("sortRandom").addEventListener("click", function(){  
-    const iterations = 10; 
+    const iterations = 100; 
     const headers = document.getElementsByTagName("th");
-    let t1, t2, num;
+    let t1, t2, num, result = [];
     
     function test(val) {
         if (val === 0) {
-            return console.log("done with iteration");
+            return console.log("done with iteration", result);
         } 
         else{
             num = Math.floor(Math.random() * 13)
@@ -13,7 +13,7 @@ document.getElementById("sortRandom").addEventListener("click", function(){
             headers[num].click();
             requestAnimationFrame(()=> {
                 t2 = performance.now();
-                console.log(headers[num], t1, t2, t2 - t1);
+                result.push(t2 - t1);
                 requestAnimationFrame(()=> { 
                     return test(val-1) 
                 }); 

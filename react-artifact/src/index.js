@@ -60,7 +60,6 @@ class Artifact extends React.Component {
         this.sortData = this.sortData.bind(this);
         this.sortedColumn = "Bolagsnamn";
         this.reverseOrder = true;
-        /* this.time = 0; */
     }
 
     updateSearch(event) {
@@ -69,8 +68,6 @@ class Artifact extends React.Component {
     }
 
     sortData(column) {
-        /* this.time = performance.now();
-        console.log(this.time); */
         this.reverseOrder = (this.sortedColumn === column) ? !this.reverseOrder : false;
         this.sortedColumn = column;
 
@@ -133,18 +130,12 @@ class Artifact extends React.Component {
         }
     }
 
-    /* componentDidUpdate () {
-        requestAnimationFrame(()=> {
-            let t = performance.now();
-            console.log(t, this.time, t - this.time);
-        });
-    } */
-
     render() {
         return (
             <div>
                 <h1 id="start">React version 16.13.1</h1>
-                <span id="sortRandom">sort randomly</span>
+                <span id="sortRandom">sort</span>
+                <span id="filterRandom">filter</span>
                 <div><input type="file" onChange={this.getFile} accept=".csv" /></div>          
                 <label htmlFor="searchBox">
                     Sök: <input 
