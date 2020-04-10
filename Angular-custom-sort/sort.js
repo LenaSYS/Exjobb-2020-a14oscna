@@ -1,12 +1,25 @@
-document.getElementById("sortRandom").addEventListener("click", function(){
+document.getElementById("sortRandom").addEventListener("click", function(){  
+    const iterations = 10; 
     const headers = document.getElementsByTagName("th");
     let t1, t2, num;
-    for (let i = 0; i < 2; i++) {
-        num = Math.floor(Math.random() * 13)
-        t1 = performance.now();
-        headers[num].click();
-        t2 = performance.now();
-        console.log("Sorting took " + (t2 - t1) + " milliseconds to complete.");       
-    }
-
+    
+    function test(val) {
+        if (val === 0) {
+            return console.log("done with iteration");
+        } 
+        else{
+            num = Math.floor(Math.random() * 13)
+            t1 = performance.now(); 
+            headers[num].click();
+            requestAnimationFrame(()=> {
+                t2 = performance.now();
+                console.log(headers[num], t1, t2, t2 - t1);
+                requestAnimationFrame(()=> { 
+                    return test(val-1) 
+                }); 
+            });           
+        }
+    };
+           
+    test(iterations);
 });

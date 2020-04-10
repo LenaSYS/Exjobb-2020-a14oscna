@@ -60,7 +60,7 @@ class Artifact extends React.Component {
         this.sortData = this.sortData.bind(this);
         this.sortedColumn = "Bolagsnamn";
         this.reverseOrder = true;
-        this.time = 0;
+        /* this.time = 0; */
     }
 
     updateSearch(event) {
@@ -69,8 +69,8 @@ class Artifact extends React.Component {
     }
 
     sortData(column) {
-        this.time = performance.now();
-        console.log(this.time);
+        /* this.time = performance.now();
+        console.log(this.time); */
         this.reverseOrder = (this.sortedColumn === column) ? !this.reverseOrder : false;
         this.sortedColumn = column;
 
@@ -98,7 +98,7 @@ class Artifact extends React.Component {
     }
 
     getFile (e) {
-        var rowSize = 10000; //set number of rows to parse;
+        var rowSize = 1000; //set number of rows to parse;
         var file = e.target.files[0];
         var reader = new FileReader();
         
@@ -133,12 +133,12 @@ class Artifact extends React.Component {
         }
     }
 
-    componentDidUpdate () {
+    /* componentDidUpdate () {
         requestAnimationFrame(()=> {
             let t = performance.now();
             console.log(t, this.time, t - this.time);
         });
-    }
+    } */
 
     render() {
         return (

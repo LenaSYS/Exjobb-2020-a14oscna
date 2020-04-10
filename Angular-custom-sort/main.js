@@ -5,7 +5,7 @@ angular.module('stockTable', [])
     require: "ngModel",
     link: function(scope,elem,attr,ctrlr) {
       elem.on("change", function(e) {
-        var rowSize = 10000; //set number of rows to parse;
+        var rowSize = 1000; //set number of rows to parse;
         var file = elem[0].files[0];
         var reader = new FileReader();
         
@@ -35,16 +35,6 @@ angular.module('stockTable', [])
 .controller('tableController', function($scope) {    
   $scope.sortedColumn = "Bolagsnamn";
   $scope.reverseOrder = false;
-  $scope.getTime = function() {
-    $scope.time = performance.now();
-    console.log($scope.time);
-    $scope.$$postDigest(function (){
-      requestAnimationFrame(()=> {
-        let t = performance.now();
-        console.log(t, $scope.time, t - $scope.time);
-      });
-    })
-  }
 
   $scope.parseNumbers = function (s) {
     if (s == "") return s;
@@ -52,7 +42,6 @@ angular.module('stockTable', [])
   };
 
   $scope.sortData = function (column) {
-    $scope.getTime();
     $scope.reverseOrder = ($scope.sortedColumn == column) ? !$scope.reverseOrder : false;
     $scope.sortedColumn = column;
     $scope.stockData = $scope.stockData.sort((a,b) => {

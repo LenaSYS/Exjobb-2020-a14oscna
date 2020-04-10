@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="main.css">
     <title>Angular 1.7.9</title>
 </head>
-<body ng-init>
+<body>
     <div ng-controller="tableController">
         <h1>Angular version 1.7.9 custom sort</h1>
         <span id="sortRandom">sort randomly</span><!-- <span id="setFilter" onclick="setFilter()">set filter</span> --><span id="filterRandom">filter randomly</span>
@@ -20,7 +20,7 @@
             <!-- select-ng-file is custom directive, links data back via 
             ng-model="stockData" which is further used in the table below -->
         </div> 
-        <label for="searchBox">Sök: <input type="text" name="searchBox1" id="searchBox" ng-change="test()" ng-model="filterText" ></label>      
+        <label for="searchBox">Sök: <input type="text" name="searchBox1" id="searchBox" ng-model="filterText" ></label>      
         <table>
             <thead>
                 <tr>
