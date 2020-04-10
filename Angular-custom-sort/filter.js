@@ -3,7 +3,7 @@ document.getElementById("filterRandom").addEventListener("click", function(){
         'Large', 'Mid', 'Small', 'Dagligvaror', 'Industri', 'Finans',
         'Hälsovård', 'Informationsteknik', "", "Livsmedel"
     ]   
-    const iterations = 100; 
+    const iterations = 1; 
     const srch = document.getElementById("searchBox");
     const srchProtoObj = Object.getPrototypeOf(srch);
     const nativeValue = Object.getOwnPropertyDescriptor(srchProtoObj, "value").set;

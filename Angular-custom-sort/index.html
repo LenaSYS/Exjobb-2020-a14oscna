@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="body in stockData | filter:filterText">
+                <tr ng-repeat="body in filterData(stockData, filterText)">
                     <td ng-repeat="(key, val) in body">
                         {{body[key]}}
                     </td>
