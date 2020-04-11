@@ -11,9 +11,11 @@ document.getElementById("sortRandom").addEventListener("click", function(){
             num = Math.floor(Math.random() * 13)
             t1 = performance.now(); 
             headers[num].click();
+            
             requestAnimationFrame(()=> {
                 t2 = performance.now();
                 result.push(t2 - t1);
+                
                 requestAnimationFrame(()=> { 
                     return test(val-1) 
                 }); 

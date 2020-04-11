@@ -1,5 +1,5 @@
 document.getElementById("sortRandom").addEventListener("click", function(){  
-    const iterations = 100; 
+    const iterations = 10; 
     const headers = document.getElementsByTagName("th");
     let t1, t2, num, result = [];
     

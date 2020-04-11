@@ -46,7 +46,7 @@ angular.module('stockTable', [])
   $scope.sortData = function (column) {
     $scope.reverseOrder = ($scope.sortedColumn == column) ? !$scope.reverseOrder : false;
     $scope.sortedColumn = column;
-    $scope.stockData = $scope.stockData.sort((a,b) => {
+    $scope.filteredStockData = $scope.filteredStockData.sort((a,b) => {
           let x, y;
 
           if(typeof(a[column]) === "string" && typeof(b[column]) === "string") {
@@ -68,9 +68,8 @@ angular.module('stockTable', [])
   };
 
   $scope.filterData = function (data, string) {
-    if (!data) {
-      return null
-    }
+    if (!data) return null;
+    
     const filteredBody = data.filter(x => { 
       for (let val in x) {
           if (typeof(x[val]) === "string") 

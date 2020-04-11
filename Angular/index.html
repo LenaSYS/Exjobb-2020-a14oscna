@@ -14,21 +14,37 @@
 <body>
     <div ng-controller="tableController">
         <h1>Angular version 1.7.9</h1>
-        <span id="sortRandom">sort</span><span id="filterRandom">filter</span>
+        <span id="sortRandom">sort</span>
+        <span id="filterRandom">filter</span>
         <div>
-            <input type="file" select-ng-file ng-model="stockData" accept=".csv" />
+            <input 
+                type="file" 
+                select-ng-file ng-model="stockData" 
+                accept=".csv" 
+            />
         </div> 
-        <label for="searchBox">Sök: <input type="text" name="searchBox1" id="searchBox" ng-model="filterText" ></label>      
+        <label for="searchBox">
+            Sök: 
+            <input 
+                type="text" 
+                name="searchBox1" 
+                id="searchBox" 
+                ng-model="filterText" 
+            />
+        </label>      
         <table>
             <thead>
                 <tr>
-                    <th ng-repeat="head in stockHead track by $index" ng-click="sortData(head)"> 
+                    <th ng-repeat="head in stockHead track by $index" 
+                        ng-click="sortData(head)"> 
                         {{head}}
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="body in stockData | filter:filterText | orderBy: sortedColumn: reverseOrder">
+                <tr ng-repeat="body in stockData 
+                            | filter:filterText 
+                            | orderBy: sortedColumn: reverseOrder">
                     <td ng-repeat="(key, val) in body">
                         {{body[key]}}
                     </td>

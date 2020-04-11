@@ -14,15 +14,30 @@
 <body>
     <div ng-controller="tableController">
         <h1>Angular version 1.7.9</h1>
-        <span id="sortRandom">sort</span><span id="filterRandom">filter</span>
+        <span id="sortRandom">sort</span>
+        <span id="filterRandom">filter</span>
         <div>
-            <input type="file" select-ng-file ng-model="stockData" accept=".csv" />
+            <input 
+                type="file" 
+                select-ng-file 
+                ng-model="stockData" 
+                accept=".csv" 
+            />
         </div> 
-        <label for="searchBox">Sök: <input type="text" name="searchBox1" id="searchBox" ng-model="filterText" ng-change="filterData(stockData, filterText)" ></label>      
+        <label for="searchBox">
+            Sök: 
+            <input 
+                type="text" 
+                id="searchBox" 
+                ng-model="filterText" 
+                ng-change="filterData(stockData, filterText)" 
+            />
+        </label>      
         <table>
             <thead>
                 <tr>
-                    <th ng-repeat="head in stockHead track by $index" ng-click="sortData(head)"> 
+                    <th ng-repeat="head in stockHead track by $index" 
+                        ng-click="sortData(head)"> 
                         {{head}}
                     </th>
                 </tr>

@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 function CreateTableHead(props) {
+    if (props.head.length < 1) return null;
+    
     const thead = props.head;
     const hRow = thead.map((item, index) =>
         <th onClick={() => props.sortData(item)} key={index}>{item}</th>
     );
-    
     return (                  
         <thead>
             <tr>
@@ -17,35 +18,31 @@ function CreateTableHead(props) {
 };
 
 function CreateTableBody(props) {
+    if (props.body.length < 1) return null;  
+    
     const tbody = props.body.filter(x => { 
         for (let val in x) {
-            if (typeof(x[val]) === "string") 
-            {
+            if (typeof(x[val]) === "string") {
                 if (x[val].toUpperCase().indexOf(props.filter.toUpperCase()) !== -1) return true;
             } 
-            else 
-            {
+            else {
                 if (x[val].toString().indexOf(props.filter) !== -1) return true;
             }          
         } 
         return false;      
     });
-
-    if (tbody.length > 0) {
-        const bRow = tbody.map((item, index) => {
-            return <tr key={index}>
-                {Object.keys(item).map(function(key) { //puts all object keys into array to allow .map
-                    return <td key={key+index} >{item[key]}</td>;
-                })}
-            </tr>
-        });
-        return (    
-            <tbody>
-                    {bRow}
-            </tbody>
-        );   
-    };        
-    return null;
+    const bRow = tbody.map((item, index) => {
+        return <tr key={index}>
+            {Object.keys(item).map((key) => {
+                return <td key={key+index} >{item[key]}</td>;
+            })}
+        </tr>
+    });
+    return (    
+        <tbody>
+                {bRow}
+        </tbody>
+    );             
 };
 
 class Artifact extends React.Component {
@@ -58,6 +55,7 @@ class Artifact extends React.Component {
         };
         this.getFile = this.getFile.bind(this);
         this.sortData = this.sortData.bind(this);
+        this.updateSearch = this.updateSearch.bind(this)
         this.sortedColumn = "Bolagsnamn";
         this.reverseOrder = true;
     }
@@ -90,11 +88,11 @@ class Artifact extends React.Component {
                     return (x > y) ? 1 : -1;   
                 }            
             })
-        })      
+        });     
     }
 
     getFile (e) {
-        var rowSize = 1000; //set number of rows to parse;
+        var rowSize = 1000;
         var file = e.target.files[0];
         var reader = new FileReader();
         
@@ -105,6 +103,7 @@ class Artifact extends React.Component {
         
         if (file) {
             reader.readAsText(file);         
+            
             reader.onload = (e) => {               
                 var csv = e.target.result;
                 var data = window.Papa.parse(csv, {
@@ -135,13 +134,16 @@ class Artifact extends React.Component {
                 <h1 id="start">React version 16.13.1</h1>
                 <span id="sortRandom">sort</span>
                 <span id="filterRandom">filter</span>
-                <div><input type="file" onChange={this.getFile} accept=".csv" /></div>          
+                <div>
+                    <input type="file" onChange={this.getFile} accept=".csv" />
+                </div>          
                 <label htmlFor="searchBox">
-                    Sök: <input 
+                    Sök: 
+                    <input 
                         type="text" 
                         id="searchBox" 
                         value={this.state.filterString} 
-                        onChange={this.updateSearch.bind(this)} 
+                        onChange={this.updateSearch} 
                     />
                 </label>
                 <table>
@@ -160,4 +162,3 @@ class Artifact extends React.Component {
 }
 
 ReactDOM.render(<Artifact />, document.getElementById('root'));
-
