@@ -14,16 +14,19 @@ angular.module('stockTable', [])
           
           reader.onload = function(e) {
             var csv = e.target.result;
-            var data = Papa.parse(csv, {header : true, preview: rowSize});
-
-            data.data.forEach(x => {
-              x.Kursutveckling = scope.parseNumbers(x.Kursutveckling);
-              x.Direktavkastning = scope.parseNumbers(x.Direktavkastning);
-              x.PE = scope.parseNumbers(x.PE);
-              x.PS = scope.parseNumbers(x.PS);
-              x.PB = scope.parseNumbers(x.PB);
+            var data = Papa.parse(csv, {
+              header : true, 
+              preview: rowSize,
+              complete: function(result){
+                result.data.forEach(x => {
+                  x.Kursutveckling = scope.parseNumbers(x.Kursutveckling);
+                  x.Direktavkastning = scope.parseNumbers(x.Direktavkastning);
+                  x.PE = scope.parseNumbers(x.PE);
+                  x.PS = scope.parseNumbers(x.PS);
+                  x.PB = scope.parseNumbers(x.PB);
+                });
+              }
             });
-
             scope.stockHead = data.meta.fields;
             ctrlr.$setViewValue(data.data);
           };
