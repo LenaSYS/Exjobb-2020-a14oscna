@@ -65,6 +65,7 @@ class Artifact extends React.Component {
     }
 
     sortData(column) {
+        console.log(column)
         this.reverseOrder = (this.sortedColumn === column) ? !this.reverseOrder : false;
         this.sortedColumn = column;
 
@@ -122,8 +123,7 @@ class Artifact extends React.Component {
                 this.setState({
                     dataHead: data.meta.fields,
                     dataBody: data.data
-                }); 
-                this.sortData(this.sortedColumn);                    
+                });                    
             };
         }
     }
@@ -135,7 +135,11 @@ class Artifact extends React.Component {
                 <span id="sortRandom">sort</span>
                 <span id="filterRandom">filter</span>
                 <div>
-                    <input type="file" onChange={this.getFile} accept=".csv" />
+                    <input 
+                        type="file" 
+                        onChange={this.getFile} 
+                        accept=".csv" 
+                    />
                 </div>          
                 <label htmlFor="searchBox">
                     Sök: 

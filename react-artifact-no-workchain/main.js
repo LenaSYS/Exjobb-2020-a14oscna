@@ -115,7 +115,6 @@ class Artifact extends React.Component {
                     dataHead: data.meta.fields,
                     dataBody: data.data
                 });
-                this.sortData(this.sortedColumn);
             };
         }
     }
