@@ -6,7 +6,11 @@ function CreateTableHead(props) {
     
     const thead = props.head;
     const hRow = thead.map((item, index) =>
-        <th onClick={() => props.sortData(item)} key={index}>{item}</th>
+        <th 
+            onClick={() => props.sortData(item)} 
+            key={index}>
+            {item}
+        </th>
     );
     return (                  
         <thead>
