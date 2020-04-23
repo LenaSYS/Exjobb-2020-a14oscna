@@ -5,7 +5,7 @@ angular.module('stockTable', [])
     require: "ngModel",
     link: function(scope,elem,attr,ctrlr) {
       elem.on("change", function(e) {
-        var rowSize = 1000; //set number of rows to parse;
+        var rowSize = 1000;
         var file = elem[0].files[0];
         var reader = new FileReader();
         
@@ -20,7 +20,6 @@ angular.module('stockTable', [])
               complete: function(result){
                 result.data.forEach(x => {
                   x.Kursutveckling = scope.parseNumbers(x.Kursutveckling);
-                  x.Direktavkastning = scope.parseNumbers(x.Direktavkastning);
                   x.PE = scope.parseNumbers(x.PE);
                   x.PS = scope.parseNumbers(x.PS);
                   x.PB = scope.parseNumbers(x.PB);

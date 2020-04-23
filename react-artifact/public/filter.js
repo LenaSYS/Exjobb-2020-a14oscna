@@ -1,22 +1,24 @@
 document.getElementById("filterRandom").addEventListener("click", function(){ 
     const s = [
-        'Large', 'Mid', 'Small', 'Dagligvaror', 'Industri', 'Finans',
-        'Hälsovård', 'Informationsteknik', "", "Livsmedel"
+        '', 'Mid', '88', 'Dagligvaror', 'Industri',
+        'Finans', 'Hälsovård', '35', 'ban', "Livsmedel",
+        '0.0', '55', 'Sverige', 'rustning', 'Danmark', 
+        '26', 'Small', 'te', 'North', 'ö', 
+        'Informationsteknik', 'ak', 'Norge', 'Large', 'ice'
     ]   
     const iterations = 100; 
     const srch = document.getElementById("searchBox");
     const srchProtoObj = Object.getPrototypeOf(srch);
     const nativeValue = Object.getOwnPropertyDescriptor(srchProtoObj, "value").set;
     const inputEvent = new Event('input', { bubbles: true });
-    let t1, t2, num, result = [];
+    let t1, t2, result = [];
 
     function test(val) {
         if (val === 0) {
-            return console.log("done with iteration", result);
+            return console.log(result);
         } 
-        else{
-            num = Math.floor(Math.random() * s.length)          
-            nativeValue.call(srch, s[num]);
+        else{       
+            nativeValue.call(srch, s[(val-1) % 25]);
             t1 = performance.now();
             srch.dispatchEvent(inputEvent);           
             

@@ -69,7 +69,6 @@ class Artifact extends React.Component {
     }
 
     sortData(column) {
-        console.log(column)
         this.reverseOrder = (this.sortedColumn === column) ? !this.reverseOrder : false;
         this.sortedColumn = column;
 
@@ -117,7 +116,6 @@ class Artifact extends React.Component {
                     complete: function(result){
                         result.data.forEach(x => {
                             x.Kursutveckling = parseNumbers(x.Kursutveckling);
-                            x.Direktavkastning = parseNumbers(x.Direktavkastning);
                             x.PE = parseNumbers(x.PE);
                             x.PS = parseNumbers(x.PS);
                             x.PB = parseNumbers(x.PB);

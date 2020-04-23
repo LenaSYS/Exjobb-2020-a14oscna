@@ -104,7 +104,6 @@ class Artifact extends React.Component {
                 complete: function (result) {
                     result.data.forEach(x => {
                         x.Kursutveckling = parseNumbers(x.Kursutveckling);
-                        x.Direktavkastning = parseNumbers(x.Direktavkastning);
                         x.PE = parseNumbers(x.PE);
                         x.PS = parseNumbers(x.PS);
                         x.PB = parseNumbers(x.PB);
