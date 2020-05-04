@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="angular.min.js"></script>
     <script src="papaparse.min.js"></script>
+    <script src="seedrandom.min.js"></script>
     <script defer src="sort.js"></script>
     <script defer src="filter.js"></script>
     <script src="main.js"></script>
@@ -43,7 +44,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="body in filteredStockData">
+                <tr ng-repeat="body in filteredStockData track by $index">
                     <td ng-repeat="(key, val) in body">
                         {{body[key]}}
                     </td>

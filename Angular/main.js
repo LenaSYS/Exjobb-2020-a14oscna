@@ -26,6 +26,7 @@ angular.module('stockTable', [])
                 });
               }
             });
+            console.log(data.data);
             scope.stockHead = data.meta.fields;
             ctrlr.$setViewValue(data.data);
           };
