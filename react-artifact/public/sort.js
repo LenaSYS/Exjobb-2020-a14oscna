@@ -1,15 +1,17 @@
 document.getElementById("sortRandom").addEventListener("click", function(){  
-    const iterations = 100; 
+    const iterations = 1000; 
     const headers = document.getElementsByTagName("th");
-    let t1, t2, result = [];
+    let t1, t2, random = -1, result = [];
+    Math.seedrandom('a14oscna');
     
     function test(val) {
         if (val === 0) {
             return console.log(result);
         } 
-        else{
+        else{            
+            random = Math.floor(Math.random()*headers.length)
             t1 = performance.now(); 
-            headers[val % 10].click();
+            headers[random].click();
             
             requestAnimationFrame(()=> {
                 t2 = performance.now();

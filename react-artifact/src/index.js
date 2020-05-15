@@ -96,14 +96,9 @@ class Artifact extends React.Component {
     }
 
     getFile (e) {
-        var rowSize = 1000;
+        var rowSize = 10000;
         var file = e.target.files[0];
         var reader = new FileReader();
-        
-        function parseNumbers (s) {
-            if (s === "") return s;
-            return parseFloat(s);
-        };
         
         if (file) {
             reader.readAsText(file);         
@@ -114,11 +109,12 @@ class Artifact extends React.Component {
                     header : true, 
                     preview: rowSize,
                     complete: function(result){
-                        result.data.forEach(x => {
-                            x.Kursutveckling = parseNumbers(x.Kursutveckling);
-                            x.PE = parseNumbers(x.PE);
-                            x.PS = parseNumbers(x.PS);
-                            x.PB = parseNumbers(x.PB);
+                        result.data.forEach(row => {
+                            Object.keys(row).forEach(col => {
+                                if (!isNaN(row[col])) {
+                                    row[col] = parseFloat(row[col])
+                                }
+                            });
                         });
                     }
                 });      

@@ -5,7 +5,7 @@ angular.module('stockTable', [])
     require: "ngModel",
     link: function(scope,elem,attr,ctrlr) {
       elem.on("change", function(e) {
-        var rowSize = 1000;
+        var rowSize = 10000;
         var file = elem[0].files[0];
         var reader = new FileReader();
         
@@ -18,11 +18,12 @@ angular.module('stockTable', [])
               header : true, 
               preview: rowSize,
               complete: function(result){
-                result.data.forEach(x => {
-                  x.Kursutveckling = scope.parseNumbers(x.Kursutveckling);
-                  x.PE = scope.parseNumbers(x.PE);
-                  x.PS = scope.parseNumbers(x.PS);
-                  x.PB = scope.parseNumbers(x.PB);
+                result.data.forEach(row => {
+                  Object.keys(row).forEach(col => {
+                    if (!isNaN(row[col])) {
+                      row[col] = parseFloat(row[col])
+                    }
+                  });
                 });
               }
             });
@@ -41,7 +42,6 @@ angular.module('stockTable', [])
   $scope.filterText = "";
 
   $scope.parseNumbers = function (s) {
-    if (s == "") return s;
     return parseFloat(s);
   };
 
