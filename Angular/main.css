@@ -1,24 +1,24 @@
 span {
-    display: inline-block;
-    margin: 0.5rem 1rem;
-    padding: 0.5rem;
-    border: 2px solid black;
-    cursor: pointer;
+  display: inline-block;
+  margin: 0.5rem 1rem;
+  padding: 0.5rem;
+  border: 2px solid black;
+  cursor: pointer;
 }
 
 table {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
 td, th {
-    padding: 5px;
-    border: 1px solid black;
+  padding: 5px;
+  border: 1px solid black;
 }
 
 th {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #searchBox {
-    margin: 15px 0;
+  margin: 15px 0;
 }

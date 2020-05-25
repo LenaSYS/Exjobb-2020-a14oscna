@@ -49,24 +49,24 @@ angular.module('stockTable', [])
     $scope.reverseOrder = ($scope.sortedColumn == column) ? !$scope.reverseOrder : false;
     $scope.sortedColumn = column;
     $scope.filteredStockData = $scope.filteredStockData.sort((a,b) => {
-          let x, y;
+      let x, y;
 
-          if(typeof(a[column]) === "string" && typeof(b[column]) === "string") {
-              x = a[column].toUpperCase();
-              y = b[column].toUpperCase();
-          }
-          else{
-              x = a[column];
-              y = b[column];
-          }
+      if(typeof(a[column]) === "string" && typeof(b[column]) === "string") {
+        x = a[column].toUpperCase();
+        y = b[column].toUpperCase();
+      }
+      else{
+        x = a[column];
+        y = b[column];
+      }
 
-          if(this.reverseOrder) {
-              return (x < y) ? 1 : -1;  
-          }
-          else {
-              return (x > y) ? 1 : -1;   
-          }            
-      })
+      if(this.reverseOrder) {
+        return (x < y) ? 1 : -1;  
+      }
+      else {
+        return (x > y) ? 1 : -1;   
+      }            
+    })
   };
 
   $scope.filterData = function (data, string) {
@@ -74,14 +74,14 @@ angular.module('stockTable', [])
     
     const filteredBody = data.filter(x => { 
       for (let val in x) {
-          if (typeof(x[val]) === "string") 
-          {
-              if (x[val].toUpperCase().indexOf(string.toUpperCase()) !== -1) return true;
-          } 
-          else 
-          {
-              if (x[val].toString().indexOf(string) !== -1) return true;
-          }          
+        if (typeof(x[val]) === "string") 
+        {
+          if (x[val].toUpperCase().indexOf(string.toUpperCase()) !== -1) return true;
+        } 
+        else 
+        {
+          if (x[val].toString().indexOf(string) !== -1) return true;
+        }          
       } 
       return false;
     });

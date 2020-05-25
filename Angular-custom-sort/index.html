@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="stockTable">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="angular.min.js"></script>
-    <script src="papaparse.min.js"></script>
-    <script src="seedrandom.min.js"></script>
-    <script defer src="sort.js"></script>
-    <script defer src="filter.js"></script>
-    <script src="main.js"></script>
-    <link rel="stylesheet" href="main.css">
-    <title>Angular (A2) 1.7.9</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="angular.min.js"></script>
+  <script src="papaparse.min.js"></script>
+  <script src="seedrandom.min.js"></script>
+  <script defer src="sort.js"></script>
+  <script defer src="filter.js"></script>
+  <script src="main.js"></script>
+  <link rel="stylesheet" href="main.css">
+  <title>Angular (A2) 1.7.9</title>
 </head>
 <body>
-    <div ng-controller="tableController">
-        <h1>Angular version 1.7.9</h1>
-        <span id="sortRandom">sort</span>
-        <span id="filterRandom">filter</span>
-        <div>
-            <input 
-                type="file" 
-                select-ng-file 
-                ng-model="stockData" 
-                accept=".csv" 
-            />
-        </div> 
-        <label for="searchBox">
-            Sök: 
-            <input 
-                type="text" 
-                id="searchBox" 
-                ng-model="filterText" 
-                ng-change="filterData(stockData, filterText)" 
-            />
-        </label>      
-        <table>
-            <thead>
-                <tr>
-                    <th ng-repeat="head in stockHead track by $index" 
-                        ng-click="sortData(head)"> 
-                        {{head}}
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="body in filteredStockData track by $index">
-                    <td ng-repeat="(key, val) in body">
-                        {{body[key]}}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  <div ng-controller="tableController">
+    <h1>Angular version 1.7.9</h1>
+    <span id="sortRandom">sort</span>
+    <span id="filterRandom">filter</span>
+    <div>
+      <input 
+        type="file" 
+        select-ng-file 
+        ng-model="stockData" 
+        accept=".csv" 
+      />
+    </div> 
+    <label for="searchBox">
+      Sök: 
+      <input 
+        type="text" 
+        id="searchBox" 
+        ng-model="filterText" 
+        ng-change="filterData(stockData, filterText)" 
+      />
+    </label>      
+    <table>
+      <thead>
+        <tr>
+          <th ng-repeat="head in stockHead track by $index" 
+            ng-click="sortData(head)"> 
+            {{head}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="body in filteredStockData track by $index">
+          <td ng-repeat="(key, val) in body">
+            {{body[key]}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
